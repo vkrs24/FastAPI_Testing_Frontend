@@ -7,6 +7,7 @@ function handleLogin() {
 
 function handleSignUpValidation(event) {
   event.preventDefault();
+  console.log("Testing");
 
   const fullname = document.querySelector("#fullname").value;
   const username = document.querySelector("#username").value;

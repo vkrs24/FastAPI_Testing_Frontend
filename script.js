@@ -31,9 +31,9 @@ function handleSignUpValidation(event) {
       alert(data.message);
 
       if (data.message === "✅ Account created successfully") {
-        window.location.href = "login.html";
+        window.location.href = "./index.html";
       } else {
-        window.location.href = "signup.html";
+        window.location.href = "./signup.html";
       }
     } catch (err) {
       console.error("Error", err);

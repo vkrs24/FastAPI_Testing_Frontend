@@ -36,8 +36,45 @@ function handleSignUpValidation(event) {
         window.location.href = "./signup.html";
       }
     } catch (err) {
-      console.error("Error", err);
+      alert(`Error: ${err}`);
     }
   };
   fetchData();
+}
+
+function handleUserValidation(event) {
+  event.preventDefault();
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
+
+  const formData = new URLSearchParams();
+  formData.append("username", email);
+  formData.append("password", password);
+
+  const sendData = async () => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/login/",
+        formData,
+        { headers: { "Content-Type": "application/x-www-form-urlencoded" } },
+        { withCredentials: true }
+      );
+
+      if (!response.status === 200) {
+        throw new Error(`HTTP Error! Status: ${response.status}`);
+      }
+
+      const data = await response.data;
+      localStorage.setItem("access_token", data.access_token);
+
+      if (data.message === "✅ Login successfully") {
+        window.location.href = "./home.html";
+      } else {
+        window.location.href = "./index.html";
+      }
+    } catch (err) {
+      alert(`Error: ${err}`);
+    }
+  };
+  sendData();
 }
